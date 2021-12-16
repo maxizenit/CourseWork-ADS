@@ -1,7 +1,8 @@
 #include "Graph.h"
 
 bool Graph::verticlesIsValid(int first, int second) {
-  return first >= 0 && second >= 0 && first < size_ && second < size_;
+  return first >= 0 && second >= 0 && first < size_ && second < size_ &&
+         first != second;
 }
 
 Graph::Graph() : size_(0), matrix_(nullptr) {}
@@ -69,8 +70,7 @@ void Graph::show() const {
     int fieldWidth = (int)log10(size_ - 1) + 2;
     int lineLength = fieldWidth * (size_ + 1) + 2;
 
-    cout << setw(fieldWidth) << ""
-         << " |";
+    cout << setw(fieldWidth) << " |";
 
     for (int i = 0; i < size_; ++i) {
       cout << setw(fieldWidth) << i;
