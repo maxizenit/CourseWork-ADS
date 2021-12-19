@@ -12,6 +12,7 @@ const string REMOVE_COMMAND = "remove";
 const string CLEAR_COMMAND = "clear";
 const string RESIZE_COMMAND = "resize";
 const string SHOW_COMMAND = "show";
+const string CLIQUE_COMMAND = "clique";
 const string GETHELP_COMMAND = "help";
 const string EXIT_COMMAND = "exit";
 
@@ -49,6 +50,9 @@ int main() {
     } else if (command == SHOW_COMMAND) {
       graph->show();
 
+    } else if (command == CLIQUE_COMMAND) {
+      graph->getMaxClique();
+
     } else if (command == GETHELP_COMMAND) {
       cout << "add <первая_вершина> <вторая_вершина> - добавить связь между "
               "двумя вершинами\n"
@@ -58,6 +62,7 @@ int main() {
            << "resize <количество_вершин> - переконструировать граф под "
               "заданное количество вершин\n"
            << "show - вывести граф на экран в виде матрицы\n"
+           << "clique - отыскать наибольшую клику в графе\n"
            << "help - помощь\n"
            << "exit - выход" << endl;
 

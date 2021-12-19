@@ -45,7 +45,7 @@ void Graph::resize(int newSize) {
       size_ = newSize;
 
       if (size_ > 0) {
-        matrix_ = new int*[size_];
+        matrix_ = new int *[size_];
         for (int i = 0; i < size_; ++i) {
           matrix_[i] = new int[size_]{};
         }
@@ -92,4 +92,60 @@ void Graph::show() const {
       cout << endl;
     }
   }
+}
+
+void Graph::getMaxClique() const {
+  vector<int> *maxClique = new vector<int>();  //последняя максимальная клика
+  vector<int> *currentClique = new vector<int>();  //текущая клика
+
+  for (int i = 0; i < size_; ++i) {
+    currentClique->push_back(i);  //с текущей вершины начинается новая клика
+
+    for (int j = 0; j < size_; ++j) {  //поиск нового кандидата для клики
+      if (i == j) {
+        continue;
+      }
+
+      bool adjacencyForAll = true;
+      //смежность кандидата с остальными текущими вершинами
+
+      //в следующем цикле проверяется, есть ли отсутствие смежности
+      //с хотя бы одной из вершин текущей клики
+      for (auto it = currentClique->begin(); it != currentClique->end(); ++it) {
+        if (matrix_[j][*it] == 0) {
+          adjacencyForAll = false;
+          //смежность отсутствует, кандидат не добавляется
+        }
+      }
+
+      if (adjacencyForAll) {
+        //если кандидат смежен с другими вершинами, он добавляется в клику
+        currentClique->push_back(j);
+      }
+    }
+
+    if (maxClique->size() < currentClique->size()) {
+      //если новая клика больше последней максимальной
+      //скопировать её содержимое в переменную максимальной клики
+      maxClique->clear();
+      for (auto it = currentClique->begin(); it != currentClique->end(); ++it) {
+        maxClique->push_back(*it);
+      }
+    }
+    currentClique->clear();
+  }
+
+  delete currentClique;
+
+  //вывод максимальной клики
+  if (maxClique->size() > 0) {
+    sort(maxClique->begin(), maxClique->end());
+    cout << "Максимальная клика состоит из вершин: ";
+    for (auto it = maxClique->begin(); it != maxClique->end(); ++it) {
+      cout << *it << " ";
+    }
+    cout << endl;
+  }
+
+  delete maxClique;
 }

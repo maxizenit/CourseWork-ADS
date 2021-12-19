@@ -1,7 +1,9 @@
 #pragma once
 
+#include <algorithm>
 #include <iomanip>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -21,4 +23,5 @@ class Graph {
   void clear();
   void resize(int newSize);
   void show() const;
+  void getMaxClique() const;
 };
