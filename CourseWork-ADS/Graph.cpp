@@ -124,7 +124,10 @@ void Graph::getMaxClique() const {
       }
     }
 
-    if (maxClique->size() < currentClique->size()) {
+    if (currentClique->size() > 1 &&
+        maxClique->size() < currentClique->size()) {
+      //в каждой клике должно быть 2 вершины. Иначе currentClique не
+      //обрабатывается
       //если новая клика больше последней максимальной
       //скопировать её содержимое в переменную максимальной клики
       maxClique->clear();
