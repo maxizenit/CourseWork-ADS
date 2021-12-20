@@ -101,11 +101,7 @@ void Graph::getMaxClique() const {
   for (int i = 0; i < size_; ++i) {
     currentClique->push_back(i);  //с текущей вершины начинается новая клика
 
-    for (int j = 0; j < size_; ++j) {  //поиск нового кандидата для клики
-      if (i == j) {
-        continue;
-      }
-
+    for (int j = i + 1; j < size_; ++j) {  //поиск нового кандидата для клики
       bool adjacencyForAll = true;
       //смежность кандидата с остальными текущими вершинами
 
